@@ -4,9 +4,9 @@ namespace TackleWiki.Business.ArticleLogic;
 
 public class ArticleSettings
 {
-    public string AuthorName { get; private set; }
-    public string Title { get; private set; }
-    public string Content { get; private set; }
+    public string? AuthorName { get; private set; }
+    public string? Title { get; private set; }
+    public string? Content { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
     public List<Comment> Comments { get; private set; }
@@ -14,30 +14,40 @@ public class ArticleSettings
     public List<Attachment> Attachments { get; private set; }
     public List<int> Ratings { get; private set; }
 
-    private ArticleSettings() { }
+    private ArticleSettings(List<Comment>? comments, List<string>? tags, List<Attachment>? attachments,
+        List<int>? ratings)
+    {
+        Comments = comments ?? [];
+        Tags = tags ?? [];
+        Attachments = attachments ?? [];
+        Ratings = ratings ?? [];
+    }
+
+    private ArticleSettings()
+    {
+        Comments = [];
+        Tags = [];
+        Attachments = [];
+        Ratings = [];
+    }
 
     public class Builder
     {
-        private readonly ArticleSettings _articleSettings;
+        private readonly ArticleSettings _articleSettings = new();
 
-        public Builder()
-        {
-            _articleSettings = new ArticleSettings();
-        }
-
-        public Builder SetAuthorName(string authorName)
+        public Builder SetAuthorName(string? authorName)
         {
             _articleSettings.AuthorName = authorName;
             return this;
         }
 
-        public Builder SetTitle(string title)
+        public Builder SetTitle(string? title)
         {
             _articleSettings.Title = title;
             return this;
         }
 
-        public Builder SetContent(string content)
+        public Builder SetContent(string? content)
         {
             _articleSettings.Content = content;
             return this;
