@@ -1,0 +1,17 @@
+{
+  "name": "cat-mood-matcher-c-sharp",
+  "version": "1.0.0",
+  "description": "A page that can give people pictures of cats and quotes that match their mood.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "start": "npm run build && webpack serve --mode development --open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.5.4",
+    "webpack": "^5.93.0"
+  }
+}
