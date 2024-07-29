@@ -70,6 +70,13 @@ public class ArticleRepository : IArticleRepository
             .ToList());
         return results;
     }
+    
+    public async Task<Article> GetRandomArticleAsync()
+    {
+        var result = await Task.Run(() => _articles.Values
+            .ElementAt(Random.Next(0, _articles.Count)));
+        return result;
+    }
 
     public async Task<List<Article>> GetArticlesByTagAsync(string tag)
     {

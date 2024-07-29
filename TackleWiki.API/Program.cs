@@ -28,4 +28,16 @@ app.MapGet("/articles", async () =>
     return Results.Ok(articles);
 });
 
+app.MapGet("/article", async () =>
+{
+    var article = await articleRepository.GetRandomArticleAsync();
+    return Results.Ok(article);
+});
+
+app.MapGet("/articles/{id}", async (string id) =>
+{
+    var article = await articleRepository.GetArticleAsync(Guid.Parse(id));
+    return Results.Ok(article);
+});
+
 app.Run();

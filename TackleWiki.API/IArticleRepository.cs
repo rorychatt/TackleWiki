@@ -14,6 +14,7 @@ public interface IArticleRepository
     
     // Read
     public Task<Article> GetArticleAsync(Guid articleId);
+    public Task<Article> GetRandomArticleAsync();
     public Task<List<Article>> GetArticlesAsync(int amount = 5);
     public Task<List<Article>> GetArticlesByTagAsync(string tag);
     public Task<List<Article>> GetArticlesByAuthorAsync(string authorName);
