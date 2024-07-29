@@ -4,6 +4,13 @@
     padding: 0 2rem;
 }
 
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/*Header*/
+
 .header-section {
     display: flex;
     justify-content: center;
@@ -19,13 +26,16 @@
     text-align: center;
 }
 
+/*Nav*/
+
 .nav-ul {
     display: flex;
     justify-content: space-around;
     flex-direction: row;
     padding: 0;
-    list-style: none;
 }
+
+/*Main*/
 
 main {
     display: flex;
@@ -33,11 +43,7 @@ main {
     align-items: center;
 }
 
-.main-article__section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+/*Footer*/
 
 footer {
     display: flex;
@@ -54,9 +60,4 @@ footer {
     justify-content: space-around;
     flex-direction: row;
     padding: 0;
-    list-style: none;
-}
-
-.footer-option {
-    list-style: none;
 }

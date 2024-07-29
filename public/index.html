@@ -4,15 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Cat mood picker</title>
+    <script src="bundle.js"></script>
+    <title>TackleWiki</title>
 </head>
 <body>
-<header>
-    <section class="header-section">
-        <h1 class="header-section__title">What kind of cat are you today?</h1>
-        <h2 class="header-section__description">Find out now!</h2>
-    </section>
-</header>
 <nav>
     <ul class="nav-ul">
         <li class="nav-option">
@@ -32,16 +27,43 @@
         </li>
     </ul>
 </nav>
+
+<header>
+    <section class="header-section">
+        <h1 class="header-section__title">A way to publish and share your open-source articles</h1>
+<!--        <h2 class="header-section__description">Git gud!</h2>-->
+    </section>
+</header>
 <main>
-    <article class="main-article">
-        <section class="main-article__section">
-            <h2 class="main-article__section-title">Your mood today is...</h2>
-            <p class="main-article__section-description">Click on the buttons above to find out!</p>
-        </section>
-        <section class="main-article__section">
-            <img class="main-article__section-img" src="https://via.placeholder.com/300" alt="Cat placeholder image">
-        </section>
-    </article>
+    <ul class="article-categories">
+        <li class="article-category">
+            <h2 class="article-category__header">Top Articles Today</h2>
+            <ul class="article-category-articles">
+                <li>
+                    <article class="article-category-article">
+                        <h3 class="article-category-article__header">
+                            Ex article header
+                        </h3>
+                        <p class="article-category-article__description">
+                            Ex article description
+                        </p>
+                        <a class="article-category-article__link" href="#">Read more</a>
+                    </article>
+                </li>
+                <li>
+                    <article class="article-category-article">
+                        <h3 class="article-category-article__header">
+                            Ex article header 2
+                        </h3>
+                        <p class="article-category-article__description">
+                            Ex article description 2
+                        </p>
+                        <a class="article-category-article__link" href="#">Read more</a>
+                    </article>
+                </li>
+            </ul>
+        </li>
+    </ul>
 </main>
 <footer>
     <section class="footer-section">
