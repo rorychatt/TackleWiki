@@ -5,10 +5,25 @@ namespace TackleWiki.API;
 
 public class ArticleRepository : IArticleRepository
 {
-    private Dictionary<string, List<Article>> _articles = new();
+    private readonly Dictionary<string, List<Article>> _articles = new();
     public Task CreateArticle(string authorName, string title, string content)
     {
-        throw new NotImplementedException();
+        var article = new Article(new ArticleSettings.Builder()
+            .SetAuthorName(authorName)
+            .SetTitle(title)
+            .SetContent(content)
+            .SetCreatedAt(DateTime.Now)
+            .Build());
+        if (_articles.TryGetValue(authorName, out var value))
+        {
+            value.Add(article);
+        }
+        else
+        {
+            _articles.Add(authorName, [article]);
+        }
+
+        return Task.CompletedTask;
     }
 
     public Task AddComment(Guid articleId, string authorName, string comment)
