@@ -8,6 +8,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IArticleRepository, ArticleRepository>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost8080",
+        corsPolicyBuilder => corsPolicyBuilder.WithOrigins("http://localhost:8080")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -18,26 +26,27 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowLocalhost8080");
 
 var articleRepository = app.Services.GetRequiredService<IArticleRepository>();
 await articleRepository.RegisterFakeArticlesAsync();
 
-app.MapGet("/articles", async () =>
+app.MapGet("/api/v1/articles", async () =>
 {
     var articles = await articleRepository.GetArticlesAsync();
     return Results.Ok(articles);
 });
 
-app.MapGet("/article", async () =>
+app.MapGet("/api/v1/article", async () =>
 {
     var article = await articleRepository.GetRandomArticleAsync();
     return Results.Ok(article);
 });
 
-app.MapGet("/articles/{id}", async (string id) =>
+app.MapGet("/api/v1/articles/{id}", async (string id) =>
 {
     var article = await articleRepository.GetArticleAsync(Guid.Parse(id));
     return Results.Ok(article);
 });
 
-app.Run();
+app.Run($"http://localhost:5090");
