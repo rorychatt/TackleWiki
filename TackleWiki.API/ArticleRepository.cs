@@ -179,4 +179,35 @@ public class ArticleRepository : IArticleRepository
             article?.Tags.Remove(tag);
         });
     }
+
+    private static readonly Random Random = new();
+
+    private static string GenerateRandomContent(int wordCount)
+    {
+        var words = new List<string>();
+        for (var i = 0; i < wordCount; i++)
+        {
+            words.Add(Guid.NewGuid().ToString().Substring(0, 5));
+        }
+
+        return string.Join(" ", words);
+    }
+
+    public async Task RegisterFakeArticlesAsync(int amount)
+    {
+        await Task.Run(() =>
+        {
+            var articleSettings = new ArticleSettings();
+            for (var i = 0; i < amount; i++)
+            {
+                var article = new Article(new ArticleSettings.Builder()
+                    .SetAuthorName("Author" + i)
+                    .SetTitle("Title" + i)
+                    .SetContent(GenerateRandomContent(40))
+                    .SetCreatedAt(DateTime.Now)
+                    .Build());
+                _articles.Add(article.Id, article);
+            }
+        });
+    }
 }

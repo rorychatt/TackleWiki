@@ -32,5 +32,8 @@ public interface IArticleRepository
     public Task DeleteRatingAsync(Guid articleId, int rating);
     public Task DeleteTagAsync(Guid articleId, string tag);
     
-    
+    // Other
+    public Task RegisterFakeArticlesAsync(int amount = 100);
+
+
 }

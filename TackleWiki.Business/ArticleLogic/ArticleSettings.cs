@@ -14,16 +14,7 @@ public class ArticleSettings
     public List<Attachment> Attachments { get; private set; }
     public List<int> Ratings { get; private set; }
 
-    private ArticleSettings(List<Comment?>? comments, List<string>? tags, List<Attachment>? attachments,
-        List<int>? ratings)
-    {
-        Comments = comments ?? [];
-        Tags = tags ?? [];
-        Attachments = attachments ?? [];
-        Ratings = ratings ?? [];
-    }
-
-    private ArticleSettings()
+    public ArticleSettings()
     {
         Comments = [];
         Tags = [];
