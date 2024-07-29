@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TackleWiki.API\TackleWiki.API.csproj" />
     <ProjectReference Include="..\TackleWiki.Business\TackleWiki.Business.csproj" />
   </ItemGroup>
 

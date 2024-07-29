@@ -12,7 +12,7 @@ public class Article(ArticleSettings articleSettings) : IArticle
     public DateTime UpdatedAt { get; private set; } = articleSettings.UpdatedAt;
     public List<Comment?> Comments { get; } = articleSettings.Comments;
     public List<string> Tags { get; } = articleSettings.Tags;
-    private List<Attachment> Attachments { get; } = articleSettings.Attachments;
+    public List<Attachment> Attachments { get; } = articleSettings.Attachments;
     public List<int> Ratings { get; } = articleSettings.Ratings;
 
     public async Task AddComment(Comment? comment)
