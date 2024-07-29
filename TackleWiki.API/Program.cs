@@ -20,6 +20,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 var articleRepository = app.Services.GetRequiredService<IArticleRepository>();
+await articleRepository.RegisterFakeArticlesAsync();
 
 app.MapGet("/articles", async () =>
 {
