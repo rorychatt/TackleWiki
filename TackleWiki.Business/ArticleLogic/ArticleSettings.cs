@@ -9,12 +9,12 @@ public class ArticleSettings
     public string? Content { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
-    public List<Comment> Comments { get; private set; }
+    public List<Comment?> Comments { get; private set; }
     public List<string> Tags { get; private set; }
     public List<Attachment> Attachments { get; private set; }
     public List<int> Ratings { get; private set; }
 
-    private ArticleSettings(List<Comment>? comments, List<string>? tags, List<Attachment>? attachments,
+    private ArticleSettings(List<Comment?>? comments, List<string>? tags, List<Attachment>? attachments,
         List<int>? ratings)
     {
         Comments = comments ?? [];
@@ -65,7 +65,7 @@ public class ArticleSettings
             return this;
         }
 
-        public Builder SetComments(List<Comment> comments)
+        public Builder SetComments(List<Comment?> comments)
         {
             _articleSettings.Comments = comments;
             return this;

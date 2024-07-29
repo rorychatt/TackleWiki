@@ -5,7 +5,8 @@ namespace TackleWiki.API;
 
 public class ArticleRepository : IArticleRepository
 {
-    private readonly Dictionary<string, List<Article>> _articles = new();
+    private readonly Dictionary<Guid, Article> _articles = new();
+
     public Task CreateArticle(string authorName, string title, string content)
     {
         var article = new Article(new ArticleSettings.Builder()
@@ -14,105 +15,163 @@ public class ArticleRepository : IArticleRepository
             .SetContent(content)
             .SetCreatedAt(DateTime.Now)
             .Build());
-        if (_articles.TryGetValue(authorName, out var value))
         {
-            value.Add(article);
-        }
-        else
-        {
-            _articles.Add(authorName, [article]);
+            _articles.Add(article.Id, article);
         }
 
         return Task.CompletedTask;
     }
 
-    public Task AddComment(Guid articleId, string authorName, string comment)
+    public Task AddComment(Guid articleId, string authorName, string content)
     {
-        throw new NotImplementedException();
+        return new Task(() =>
+        {
+            var article = _articles[articleId];
+            article?.AddComment(new Comment(authorName, content, DateTime.Now, DateTime.Now));
+        });
     }
 
     public Task AddAttachment(Guid articleId, Attachment attachment)
     {
-        throw new NotImplementedException();
+        return new Task(() =>
+        {
+            var article = _articles[articleId];
+        });
     }
 
     public Task AddRating(Guid articleId, int rating)
     {
-        throw new NotImplementedException();
+        return new Task(() =>
+        {
+            var article = _articles[articleId];
+            article?.AddRate(rating);
+        });
     }
 
     public Task AddTag(Guid articleId, string tag)
     {
-        throw new NotImplementedException();
+        return new Task(() =>
+        {
+            var article = _articles[articleId];
+            article?.AddTag(tag);
+        });
     }
 
     public Task<Article> GetArticle(Guid articleId)
     {
-        throw new NotImplementedException();
+        return new Task<Article>(() => _articles[articleId]);
     }
 
     public Task<List<Article>> GetArticles()
     {
-        throw new NotImplementedException();
+        return new Task<List<Article>>(() => _articles
+            .Values
+            .ToList());
     }
 
     public Task<List<Article>> GetArticlesByTag(string tag)
     {
-        throw new NotImplementedException();
+        return new Task<List<Article>>(() => _articles.Values
+            .Where(a =>
+                a.Tags
+                    .Contains(tag))
+            .ToList());
     }
 
     public Task<List<Article>> GetArticlesByAuthor(string authorName)
     {
-        throw new NotImplementedException();
+        return new Task<List<Article>>(() =>
+            _articles.Values
+                .Where(a => a.AuthorName == authorName)
+                .ToList());
     }
 
     public Task<List<Article>> GetArticlesByRating(int rating)
     {
-        throw new NotImplementedException();
+        return new Task<List<Article>>(() =>
+            _articles.Values
+                .Where(a => a.Ratings
+                    .Contains(rating))
+                .ToList());
     }
 
     public Task UpdateArticle(Guid articleId, string title, string content)
     {
-        throw new NotImplementedException();
+        return new Task(() =>
+        {
+            var article = _articles[articleId];
+            article.UpdateContent(content);
+        });
     }
 
     public Task UpdateComment(Guid articleId, string authorName, DateTime commentTime, string newContent)
     {
-        throw new NotImplementedException();
+        return new Task(() =>
+        {
+            var article = _articles[articleId];
+            article?.UpdateComment(authorName, commentTime, newContent);
+        });
     }
 
     public Task UpdateAttachment(Guid articleId, string attachmentName, Attachment newAttachment)
     {
-        throw new NotImplementedException();
+        return new Task(() =>
+        {
+            var article = _articles[articleId];
+            article?.RemoveAttachment(attachmentName);
+            article?.AddAttachment(newAttachment);
+        });
     }
 
     public Task UpdateRating(Guid articleId, int oldRating, int newRating)
     {
-        throw new NotImplementedException();
+        return new Task(() =>
+        {
+            var article = _articles[articleId];
+            article?.Ratings.Remove(oldRating);
+            article?.AddRate(newRating);
+        });
     }
 
     public Task DeleteArticle(Guid articleId)
     {
-        throw new NotImplementedException();
+        return new Task(() => _articles.Remove(articleId));
     }
 
     public Task DeleteComment(Guid articleId, string authorName, DateTime commentTime)
     {
-        throw new NotImplementedException();
+        return new Task(() =>
+        {
+            var article = _articles[articleId];
+            article?.Comments.Remove(article.Comments.Find(c =>
+                c?.AuthorName == authorName && c.CreatedAt == commentTime));
+        });
     }
 
     public Task DeleteAttachment(Guid articleId, string attachmentName)
     {
-        throw new NotImplementedException();
+        return new Task(() =>
+        {
+            var article = _articles[articleId];
+            article?.RemoveAttachment(attachmentName);
+        });
     }
 
     public Task DeleteRating(Guid articleId, int rating)
     {
-        throw new NotImplementedException();
+        return new Task(() =>
+        {
+            var article = _articles[articleId];
+            article?.Ratings.Remove(rating);
+        });
     }
 
     public Task DeleteTag(Guid articleId, string tag)
     {
-        throw new NotImplementedException();
+        return new Task(() =>
+        {
+            var article = _articles[articleId];
+            article?.Tags.Remove(tag);
+        });
     }
 }

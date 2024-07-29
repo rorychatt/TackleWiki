@@ -10,14 +10,14 @@ public class Article(ArticleSettings articleSettings) : IArticle
     public string? Content { get; set; } = articleSettings.Content;
     public DateTime CreatedAt { get; } = articleSettings.CreatedAt;
     public DateTime UpdatedAt { get; private set; } = articleSettings.UpdatedAt;
-    private List<Comment> Comments { get; } = articleSettings.Comments;
-    private List<string> Tags { get; } = articleSettings.Tags;
+    public List<Comment?> Comments { get; } = articleSettings.Comments;
+    public List<string> Tags { get; } = articleSettings.Tags;
     private List<Attachment> Attachments { get; } = articleSettings.Attachments;
-    private List<int> Ratings { get; } = articleSettings.Ratings;
+    public List<int> Ratings { get; } = articleSettings.Ratings;
 
-    public Task AddComment(Comment comment)
+    public Task AddComment(Comment? comment)
     {
-        return new Task(() => Comments?.Add(comment));
+        return new Task(() => Comments.Add(comment));
     }
 
     public Task UpdateComment(string authorName, DateTime commentTime, string newContent)
