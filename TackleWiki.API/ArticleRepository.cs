@@ -24,7 +24,7 @@ public class ArticleRepository : IArticleRepository
 
     public async Task AddCommentAsync(Guid articleId, string authorName, string content)
     {
-        await new Task(() =>
+        await Task.Run(() =>
         {
             var article = _articles[articleId];
             article?.AddComment(new Comment(authorName, content, DateTime.Now, DateTime.Now));
@@ -33,7 +33,7 @@ public class ArticleRepository : IArticleRepository
 
     public async Task AddAttachmentAsync(Guid articleId, Attachment attachment)
     {
-        await new Task(() =>
+        await Task.Run(() =>
         {
             var article = _articles[articleId];
         });
@@ -41,7 +41,7 @@ public class ArticleRepository : IArticleRepository
 
     public async Task AddRatingAsync(Guid articleId, int rating)
     {
-        await new Task(() =>
+        await Task.Run(() =>
         {
             var article = _articles[articleId];
             article?.AddRate(rating);
@@ -50,7 +50,7 @@ public class ArticleRepository : IArticleRepository
 
     public async Task AddTagAsync(Guid articleId, string tag)
     {
-        await new Task(() =>
+        await Task.Run(() =>
         {
             var article = _articles[articleId];
             article?.AddTag(tag);
@@ -64,14 +64,14 @@ public class ArticleRepository : IArticleRepository
 
     public Task<List<Article>> GetArticles()
     {
-        return new Task<List<Article>>(() => _articles
+        return Task.Run<List<Article>>(() => _articles
             .Values
             .ToList());
     }
 
     public Task<List<Article>> GetArticlesByTag(string tag)
     {
-        return new Task<List<Article>>(() => _articles.Values
+        return Task.Run<List<Article>>(() => _articles.Values
             .Where(a =>
                 a.Tags
                     .Contains(tag))
@@ -80,7 +80,7 @@ public class ArticleRepository : IArticleRepository
 
     public Task<List<Article>> GetArticlesByAuthor(string authorName)
     {
-        return new Task<List<Article>>(() =>
+        return Task.Run<List<Article>>(() =>
             _articles.Values
                 .Where(a => a.AuthorName == authorName)
                 .ToList());
@@ -88,7 +88,7 @@ public class ArticleRepository : IArticleRepository
 
     public Task<List<Article>> GetArticlesByRating(int rating)
     {
-        return new Task<List<Article>>(() =>
+        return Task.Run<List<Article>>(() =>
             _articles.Values
                 .Where(a => a.Ratings
                     .Contains(rating))
@@ -97,7 +97,7 @@ public class ArticleRepository : IArticleRepository
 
     public async Task UpdateArticleAsync(Guid articleId, string title, string content)
     {
-        await new Task(() =>
+        await Task.Run(() =>
         {
             var article = _articles[articleId];
             article.UpdateContent(content);
@@ -106,7 +106,7 @@ public class ArticleRepository : IArticleRepository
 
     public async Task UpdateCommentAsync(Guid articleId, string authorName, DateTime commentTime, string newContent)
     {
-        await new Task(() =>
+        await Task.Run(() =>
         {
             var article = _articles[articleId];
             article?.UpdateComment(authorName, commentTime, newContent);
@@ -115,7 +115,7 @@ public class ArticleRepository : IArticleRepository
 
     public async Task UpdateAttachmentAsync(Guid articleId, string attachmentName, Attachment newAttachment)
     {
-        await new Task(() =>
+        await Task.Run(() =>
         {
             var article = _articles[articleId];
             article?.RemoveAttachment(attachmentName);
@@ -125,7 +125,7 @@ public class ArticleRepository : IArticleRepository
 
     public async Task UpdateRatingAsync(Guid articleId, int oldRating, int newRating)
     {
-        await new Task(() =>
+        await Task.Run(() =>
         {
             var article = _articles[articleId];
             article?.Ratings.Remove(oldRating);
@@ -135,12 +135,12 @@ public class ArticleRepository : IArticleRepository
 
     public async Task DeleteArticleAsync(Guid articleId)
     {
-        await new Task(() => _articles.Remove(articleId));
+        await Task.Run(() => _articles.Remove(articleId));
     }
 
     public async Task DeleteCommentAsync(Guid articleId, string authorName, DateTime commentTime)
     {
-        await new Task(() =>
+        await Task.Run(() =>
         {
             var article = _articles[articleId];
             article?.Comments.Remove(article.Comments.Find(c =>
@@ -150,7 +150,7 @@ public class ArticleRepository : IArticleRepository
 
     public async Task DeleteAttachmentAsync(Guid articleId, string attachmentName)
     {
-        await new Task(() =>
+        await Task.Run(() =>
         {
             var article = _articles[articleId];
             article?.RemoveAttachment(attachmentName);
@@ -159,7 +159,7 @@ public class ArticleRepository : IArticleRepository
 
     public async Task DeleteRatingAsync(Guid articleId, int rating)
     {
-        await new Task(() =>
+        await Task.Run(() =>
         {
             var article = _articles[articleId];
             article?.Ratings.Remove(rating);
@@ -168,7 +168,7 @@ public class ArticleRepository : IArticleRepository
 
     public async Task DeleteTagAsync(Guid articleId, string tag)
     {
-        await new Task(() =>
+        await Task.Run(() =>
         {
             var article = _articles[articleId];
             article?.Tags.Remove(tag);
