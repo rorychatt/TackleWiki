@@ -23,7 +23,7 @@ public class Article(ArticleSettings articleSettings) : IArticle
     {
         return new Task(() =>
         {
-            var comment = Comments?.Find(c => c.AuthorName == authorName && c.CreatedAt == commentTime);
+            var comment = Comments.Find(c => c.AuthorName == authorName && c.CreatedAt == commentTime);
             if (comment != null)
             {
                 comment.Content = newContent;
@@ -49,19 +49,19 @@ public class Article(ArticleSettings articleSettings) : IArticle
 
     public Task RemoveTag(string tagName)
     {
-        return new Task(() => Tags?.Remove(tagName));
+        return new Task(() => Tags.Remove(tagName));
     }
 
     public Task AddAttachment(Attachment attachment)
     {
-        return new Task(() => Attachments?.Add(attachment));
+        return new Task(() => Attachments.Add(attachment));
     }
 
     public Task RemoveAttachment(string attachmentName)
     {
         return new Task(() =>
         {
-            var attachment = Attachments?.Find(a => a.Name == attachmentName);
+            var attachment = Attachments.Find(a => a.Name == attachmentName);
             if (attachment != null)
             {
                 Attachments?.Remove(attachment);
