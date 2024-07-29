@@ -40,7 +40,7 @@ public class Article(ArticleSettings articleSettings) : IArticle
     {
         return new Task(() =>
         {
-            if (Tags != null && !Tags.Contains(newTagName))
+            if (!Tags.Contains(newTagName))
             {
                 Tags.Add(newTagName);
             }
