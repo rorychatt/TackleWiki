@@ -1,12 +1,14 @@
-﻿namespace TackleWiki.Business.ArticleLogic;
+﻿using System.Net.Mail;
+
+namespace TackleWiki.Business.ArticleLogic;
 
 public interface IArticle
 {
-    // public Task CreateComment();
-    // public Task UpdateComment();
-    // public Task AddTag();
-    // public Task RemoveTag();
-    // public Task AddAttachment();
-    // public Task RemoveAttachment();
-    // public Task AddRate();
+    public Task AddComment(Comment comment);
+    public Task UpdateComment(string authorName, DateTime commentTime, string newContent);
+    public Task AddTag(string newTagName);
+    public Task RemoveTag(string tagName);
+    public Task AddAttachment(Attachment attachment);
+    public Task RemoveAttachment(string attachmentName);
+    public Task AddRate(int newRate);
 }
