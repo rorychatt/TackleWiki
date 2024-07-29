@@ -15,16 +15,16 @@ public class Article(ArticleSettings articleSettings) : IArticle
     private List<Attachment> Attachments { get; } = articleSettings.Attachments;
     public List<int> Ratings { get; } = articleSettings.Ratings;
 
-    public Task AddComment(Comment? comment)
+    public async Task AddComment(Comment? comment)
     {
-        return new Task(() => Comments.Add(comment));
+        await new Task(() => Comments.Add(comment));
     }
 
-    public Task UpdateComment(string authorName, DateTime commentTime, string newContent)
+    public async Task UpdateComment(string authorName, DateTime commentTime, string newContent)
     {
-        return new Task(() =>
+        await new Task(() =>
         {
-            var comment = Comments.Find(c => c.AuthorName == authorName && c.CreatedAt == commentTime);
+            var comment = Comments.Find(c => c?.AuthorName == authorName && c.CreatedAt == commentTime);
             if (comment != null)
             {
                 comment.Content = newContent;
@@ -37,9 +37,9 @@ public class Article(ArticleSettings articleSettings) : IArticle
         });
     }
 
-    public Task AddTag(string newTagName)
+    public async Task AddTag(string newTagName)
     {
-        return new Task(() =>
+        await new Task(() =>
         {
             if (!Tags.Contains(newTagName))
             {
@@ -48,14 +48,14 @@ public class Article(ArticleSettings articleSettings) : IArticle
         });
     }
 
-    public Task RemoveTag(string tagName)
+    public async Task RemoveTag(string tagName)
     {
-        return new Task(() => Tags.Remove(tagName));
+        await new Task(() => Tags.Remove(tagName));
     }
 
-    public Task AddAttachment(Attachment attachment)
+    public async Task AddAttachment(Attachment attachment)
     {
-        return new Task(() => Attachments.Add(attachment));
+        await new Task(() => Attachments.Add(attachment));
     }
 
     public Task RemoveAttachment(string attachmentName)

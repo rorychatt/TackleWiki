@@ -7,7 +7,7 @@ public class ArticleRepository : IArticleRepository
 {
     private readonly Dictionary<Guid, Article> _articles = new();
 
-    public Task CreateArticle(string authorName, string title, string content)
+    public async Task CreateArticleAsync(string authorName, string title, string content)
     {
         var article = new Article(new ArticleSettings.Builder()
             .SetAuthorName(authorName)
@@ -19,38 +19,38 @@ public class ArticleRepository : IArticleRepository
             _articles.Add(article.Id, article);
         }
 
-        return Task.CompletedTask;
+        await Task.CompletedTask;
     }
 
-    public Task AddComment(Guid articleId, string authorName, string content)
+    public async Task AddCommentAsync(Guid articleId, string authorName, string content)
     {
-        return new Task(() =>
+        await new Task(() =>
         {
             var article = _articles[articleId];
             article?.AddComment(new Comment(authorName, content, DateTime.Now, DateTime.Now));
         });
     }
 
-    public Task AddAttachment(Guid articleId, Attachment attachment)
+    public async Task AddAttachmentAsync(Guid articleId, Attachment attachment)
     {
-        return new Task(() =>
+        await new Task(() =>
         {
             var article = _articles[articleId];
         });
     }
 
-    public Task AddRating(Guid articleId, int rating)
+    public async Task AddRatingAsync(Guid articleId, int rating)
     {
-        return new Task(() =>
+        await new Task(() =>
         {
             var article = _articles[articleId];
             article?.AddRate(rating);
         });
     }
 
-    public Task AddTag(Guid articleId, string tag)
+    public async Task AddTagAsync(Guid articleId, string tag)
     {
-        return new Task(() =>
+        await new Task(() =>
         {
             var article = _articles[articleId];
             article?.AddTag(tag);
@@ -59,7 +59,7 @@ public class ArticleRepository : IArticleRepository
 
     public Task<Article> GetArticle(Guid articleId)
     {
-        return new Task<Article>(() => _articles[articleId]);
+        return Task.FromResult(_articles[articleId]);
     }
 
     public Task<List<Article>> GetArticles()
@@ -95,27 +95,27 @@ public class ArticleRepository : IArticleRepository
                 .ToList());
     }
 
-    public Task UpdateArticle(Guid articleId, string title, string content)
+    public async Task UpdateArticleAsync(Guid articleId, string title, string content)
     {
-        return new Task(() =>
+        await new Task(() =>
         {
             var article = _articles[articleId];
             article.UpdateContent(content);
         });
     }
 
-    public Task UpdateComment(Guid articleId, string authorName, DateTime commentTime, string newContent)
+    public async Task UpdateCommentAsync(Guid articleId, string authorName, DateTime commentTime, string newContent)
     {
-        return new Task(() =>
+        await new Task(() =>
         {
             var article = _articles[articleId];
             article?.UpdateComment(authorName, commentTime, newContent);
         });
     }
 
-    public Task UpdateAttachment(Guid articleId, string attachmentName, Attachment newAttachment)
+    public async Task UpdateAttachmentAsync(Guid articleId, string attachmentName, Attachment newAttachment)
     {
-        return new Task(() =>
+        await new Task(() =>
         {
             var article = _articles[articleId];
             article?.RemoveAttachment(attachmentName);
@@ -123,9 +123,9 @@ public class ArticleRepository : IArticleRepository
         });
     }
 
-    public Task UpdateRating(Guid articleId, int oldRating, int newRating)
+    public async Task UpdateRatingAsync(Guid articleId, int oldRating, int newRating)
     {
-        return new Task(() =>
+        await new Task(() =>
         {
             var article = _articles[articleId];
             article?.Ratings.Remove(oldRating);
@@ -133,14 +133,14 @@ public class ArticleRepository : IArticleRepository
         });
     }
 
-    public Task DeleteArticle(Guid articleId)
+    public async Task DeleteArticleAsync(Guid articleId)
     {
-        return new Task(() => _articles.Remove(articleId));
+        await new Task(() => _articles.Remove(articleId));
     }
 
-    public Task DeleteComment(Guid articleId, string authorName, DateTime commentTime)
+    public async Task DeleteCommentAsync(Guid articleId, string authorName, DateTime commentTime)
     {
-        return new Task(() =>
+        await new Task(() =>
         {
             var article = _articles[articleId];
             article?.Comments.Remove(article.Comments.Find(c =>
@@ -148,27 +148,27 @@ public class ArticleRepository : IArticleRepository
         });
     }
 
-    public Task DeleteAttachment(Guid articleId, string attachmentName)
+    public async Task DeleteAttachmentAsync(Guid articleId, string attachmentName)
     {
-        return new Task(() =>
+        await new Task(() =>
         {
             var article = _articles[articleId];
             article?.RemoveAttachment(attachmentName);
         });
     }
 
-    public Task DeleteRating(Guid articleId, int rating)
+    public async Task DeleteRatingAsync(Guid articleId, int rating)
     {
-        return new Task(() =>
+        await new Task(() =>
         {
             var article = _articles[articleId];
             article?.Ratings.Remove(rating);
         });
     }
 
-    public Task DeleteTag(Guid articleId, string tag)
+    public async Task DeleteTagAsync(Guid articleId, string tag)
     {
-        return new Task(() =>
+        await new Task(() =>
         {
             var article = _articles[articleId];
             article?.Tags.Remove(tag);

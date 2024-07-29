@@ -6,11 +6,11 @@ namespace TackleWiki.API;
 public interface IArticleRepository
 {
     // Create
-    public Task CreateArticle(string authorName, string title, string content);
-    public Task AddComment(Guid articleId, string authorName, string comment);
-    public Task AddAttachment(Guid articleId, Attachment attachment);
-    public Task AddRating(Guid articleId, int rating);
-    public Task AddTag(Guid articleId, string tag);
+    public Task CreateArticleAsync(string authorName, string title, string content);
+    public Task AddCommentAsync(Guid articleId, string authorName, string comment);
+    public Task AddAttachmentAsync(Guid articleId, Attachment attachment);
+    public Task AddRatingAsync(Guid articleId, int rating);
+    public Task AddTagAsync(Guid articleId, string tag);
     
     // Read
     public Task<Article> GetArticle(Guid articleId);
@@ -20,17 +20,17 @@ public interface IArticleRepository
     public Task<List<Article>> GetArticlesByRating(int rating);
     
     // Update
-    public Task UpdateArticle(Guid articleId, string title, string content);
-    public Task UpdateComment(Guid articleId, string authorName, DateTime commentTime, string newContent);
-    public Task UpdateAttachment(Guid articleId, string attachmentName, Attachment newAttachment);
-    public Task UpdateRating(Guid articleId, int oldRating, int newRating);
+    public Task UpdateArticleAsync(Guid articleId, string title, string content);
+    public Task UpdateCommentAsync(Guid articleId, string authorName, DateTime commentTime, string newContent);
+    public Task UpdateAttachmentAsync(Guid articleId, string attachmentName, Attachment newAttachment);
+    public Task UpdateRatingAsync(Guid articleId, int oldRating, int newRating);
     
     // Delete
-    public Task DeleteArticle(Guid articleId);
-    public Task DeleteComment(Guid articleId, string authorName, DateTime commentTime);
-    public Task DeleteAttachment(Guid articleId, string attachmentName);
-    public Task DeleteRating(Guid articleId, int rating);
-    public Task DeleteTag(Guid articleId, string tag);
+    public Task DeleteArticleAsync(Guid articleId);
+    public Task DeleteCommentAsync(Guid articleId, string authorName, DateTime commentTime);
+    public Task DeleteAttachmentAsync(Guid articleId, string attachmentName);
+    public Task DeleteRatingAsync(Guid articleId, int rating);
+    public Task DeleteTagAsync(Guid articleId, string tag);
     
     
 }

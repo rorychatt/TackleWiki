@@ -21,7 +21,6 @@ app.UseHttpsRedirection();
 
 var articleRepository = app.Services.GetRequiredService<IArticleRepository>();
 
-
 app.MapGet("/articles", () => Results.Ok(articleRepository.GetArticles()));
 
 app.Run();
