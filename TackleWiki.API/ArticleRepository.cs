@@ -5,6 +5,7 @@ namespace TackleWiki.API;
 
 public class ArticleRepository : IArticleRepository
 {
+    private Dictionary<string, List<Article>> _articles = new();
     public Task CreateArticle(string authorName, string title, string content)
     {
         throw new NotImplementedException();
