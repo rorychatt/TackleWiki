@@ -4,11 +4,12 @@ namespace TackleWiki.Business.ArticleLogic;
 
 public class Article(ArticleSettings articleSettings) : IArticle
 {
+    public Guid Id { get; } = Guid.NewGuid();
     public string? AuthorName { get; } = articleSettings.AuthorName;
     public string? Title { get; set; } = articleSettings.Title;
     public string? Content { get; set; } = articleSettings.Content;
     public DateTime CreatedAt { get; } = articleSettings.CreatedAt;
-    public DateTime UpdatedAt { get; } = articleSettings.UpdatedAt;
+    public DateTime UpdatedAt { get; private set; } = articleSettings.UpdatedAt;
     private List<Comment> Comments { get; } = articleSettings.Comments;
     private List<string> Tags { get; } = articleSettings.Tags;
     private List<Attachment> Attachments { get; } = articleSettings.Attachments;
@@ -76,5 +77,14 @@ public class Article(ArticleSettings articleSettings) : IArticle
     public Task AddRate(int newRate)
     {
         return new Task(() => Ratings?.Add(newRate));
+    }
+
+    public Task UpdateContent(string newContent)
+    {
+        return new Task(() =>
+        {
+            Content = newContent;
+            UpdatedAt = DateTime.Now;
+        });
     }
 }

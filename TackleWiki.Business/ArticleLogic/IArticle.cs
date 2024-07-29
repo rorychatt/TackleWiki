@@ -11,4 +11,5 @@ public interface IArticle
     public Task AddAttachment(Attachment attachment);
     public Task RemoveAttachment(string attachmentName);
     public Task AddRate(int newRate);
+    public Task UpdateContent(string newContent);
 }
