@@ -57,42 +57,47 @@ public class ArticleRepository : IArticleRepository
         });
     }
 
-    public Task<Article> GetArticle(Guid articleId)
+    public async Task<Article> GetArticleAsync(Guid articleId)
     {
-        return Task.FromResult(_articles[articleId]);
+        var result = await Task.FromResult(_articles[articleId]);
+        return result;
     }
 
-    public Task<List<Article>> GetArticles()
+    public async Task<List<Article>> GetArticlesAsync(int amount)
     {
-        return Task.Run<List<Article>>(() => _articles
-            .Values
+        var results = await Task.Run(() => _articles.Values
+            .Take(amount)
             .ToList());
+        return results;
     }
 
-    public Task<List<Article>> GetArticlesByTag(string tag)
+    public async Task<List<Article>> GetArticlesByTagAsync(string tag)
     {
-        return Task.Run<List<Article>>(() => _articles.Values
+        var results = await Task.Run(() => _articles.Values
             .Where(a =>
                 a.Tags
                     .Contains(tag))
             .ToList());
+        return results;
     }
 
-    public Task<List<Article>> GetArticlesByAuthor(string authorName)
+    public async Task<List<Article>> GetArticlesByAuthorAsync(string authorName)
     {
-        return Task.Run<List<Article>>(() =>
+        var results = await Task.Run(() =>
             _articles.Values
                 .Where(a => a.AuthorName == authorName)
                 .ToList());
+        return results;
     }
 
-    public Task<List<Article>> GetArticlesByRating(int rating)
+    public async Task<List<Article>> GetArticlesByRatingAsync(int rating)
     {
-        return Task.Run<List<Article>>(() =>
+        var results = await Task.Run(() =>
             _articles.Values
                 .Where(a => a.Ratings
                     .Contains(rating))
                 .ToList());
+        return results;
     }
 
     public async Task UpdateArticleAsync(Guid articleId, string title, string content)

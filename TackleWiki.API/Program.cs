@@ -23,7 +23,7 @@ var articleRepository = app.Services.GetRequiredService<IArticleRepository>();
 
 app.MapGet("/articles", async () =>
 {
-    var articles = await articleRepository.GetArticles();
+    var articles = await articleRepository.GetArticlesAsync();
     return Results.Ok(articles);
 });
 

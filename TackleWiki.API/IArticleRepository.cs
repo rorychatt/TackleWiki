@@ -13,11 +13,11 @@ public interface IArticleRepository
     public Task AddTagAsync(Guid articleId, string tag);
     
     // Read
-    public Task<Article> GetArticle(Guid articleId);
-    public Task<List<Article>> GetArticles();
-    public Task<List<Article>> GetArticlesByTag(string tag);
-    public Task<List<Article>> GetArticlesByAuthor(string authorName);
-    public Task<List<Article>> GetArticlesByRating(int rating);
+    public Task<Article> GetArticleAsync(Guid articleId);
+    public Task<List<Article>> GetArticlesAsync(int amount = 5);
+    public Task<List<Article>> GetArticlesByTagAsync(string tag);
+    public Task<List<Article>> GetArticlesByAuthorAsync(string authorName);
+    public Task<List<Article>> GetArticlesByRatingAsync(int rating);
     
     // Update
     public Task UpdateArticleAsync(Guid articleId, string title, string content);
