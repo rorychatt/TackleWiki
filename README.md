@@ -1,2 +1,3 @@
-# cat-mood-matcher-c-
-A page that can give people pictures of cats and quotes that match their mood.
+# TackleWiki
+A page that allows you to create and edit their articles.
+It will support Latex, Markdown, and HTML structures for articles.
