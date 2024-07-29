@@ -25,7 +25,7 @@ ul {
     flex-direction: column;
     align-items: center;
     padding: 4rem 2rem 0 2rem;
-    
+
 }
 
 .header-section__title {
@@ -43,59 +43,64 @@ nav {
     top: 0;
     width: 100%;
     z-index: 1;
-    background-color: var(--quaternary-color);
+    background-color: #34495e;
 }
 
-    .nav-ul {
-        display: flex;
-        justify-content: space-around;
-        flex-direction: row;
-        padding: 0;
-    }
+.nav-ul {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    padding: 0;
+}
 
-    /*Main*/
+/*Main*/
 
-    main {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    .article-categories {
-        display: flex;
-        justify-content: space-around;
-        flex-direction: row;
-        padding: 0;
-    }
+.article-categories {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    padding: 0 2em;
+}
 
-    /*Article*/
+/*Article*/
 
-    .article {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border: 1px solid var(--quaternary-color);
-        border-radius: 5px;
-        padding: 1rem 0;
-        margin: 1rem 0;
-    }
+.article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #34495e;
+    text-align: center;
+    border-radius: 5px;
+    padding: 1rem 1rem;
+    margin: 1rem 0;
+}
 
-    /*Footer*/
+.article-category__header{
+    text-align: center;
+}
+/*Footer*/
 
-    footer {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-    }
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
 
-    .footer-section {
+.footer-section {
 
-    }
+}
 
-    .footer-ul {
-        display: flex;
-        justify-content: space-around;
-        flex-direction: row;
-        padding: 0;
-    }
+.footer-ul {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    padding: 0;
+}
